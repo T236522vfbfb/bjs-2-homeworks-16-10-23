@@ -1,7 +1,7 @@
 "use strict"
 function solveEquation(a, b, c) {
   let arr = [];
-  let dicr = b**-4*a*c;
+  let dicr = b**2-4*a*c;
   if (dicr < 0) {
     arr = [];
   } else if (dicr == 0) {
@@ -14,5 +14,9 @@ function solveEquation(a, b, c) {
 }
 
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-  
+  let P = percent/100/12;
+  let S = amount-contribution;
+  let month_pay = S * (P + (P / (((1 + P)**countMonths) - 1)));
+  let result = S + Math.round(month_pay*100)/100;
+  return result;
 }
