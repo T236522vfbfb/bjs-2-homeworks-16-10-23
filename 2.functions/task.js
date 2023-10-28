@@ -1,79 +1,35 @@
 function getArrayParams(...arr) {
-  let min = Infinity;
-  let max = -Infinity;
-  let sum = 0;
-
-  for (let element of arr) {
-    if (element > max) {
-      max = element;
-    }
-    if (element < min) {
-      min = element;
-    }
-    sum += element;
-  }
-
-  let avg = sum / arr.length;
-  avg = parseInt(avg.toFixed(2));
-
-  return { min: min, max: max, avg: avg };
+  return {
+  min = Math.min(...arr);
+  max = -Math.max(...arr);
+   avg: Number((arr.reduce((acc, number) => acc + number, 0) / arr.lenght).toFixed(2))
+};
 }
 
 function summElementsWorker(...arr) {
-  if (arr.length > 0) {
-    let sum = 0;
-    for (let element of arr) {
-      sum = sum + element;
-    }
-    return sum;
-  } else {
-    return 0;
-  }
+  return arr.reduce((acc, number) => acc + number, 0);
 }
 
 function differenceMaxMinWorker(...arr) {
-  if (arr.length > 0) {
-    let max = Math.max(...arr);
-    let min = Math.min(...arr);
-    return max - min;
-  } else {
-    return 0;
+    return arr.length === 0 ? 0 : Math.max(...arr) - Math.min(...arr);
   }
-}
+
 
 function differenceEvenOddWorker(...arr) {
-  if (arr.length > 0) {
-    let sumEvenElement = 0;
-    let sumOddElement = 0;
-    for (let element of arr) {
-      if (element % 2 === 0) {
-        sumEvenElement += element;
-      } else {
-        sumOddElement += element;
-      }
-    }
-    return sumEvenElement - sumOddElement;
-  } else {
-    return 0;
+  const reduceResult = arr.reduce((acc, number) => {
+    return number % 2 === 0 ? {even: acc.even + number, odd: acc.odd} : {even: acc.even, odd: acc.odd + number};
+  }, {even: 0, odd: 0});
+  
+  return reduceResult.even - reduceResult.odd;
   }
-}
 
 function averageEvenElementsWorker(...arr) {
-  if (arr.length > 0) {
-    let sumEvenElement = 0;
-    let countEvenElement = 0;
-    for (let element of arr) {
-      if (element % 2 === 0) {
-        sumEvenElement += element;
-        countEvenElement += 1;
-      }
-    }
-    return sumEvenElement / countEvenElement;
-  } else {
-    return 0;
+  const reduceResult = arr.reduce((acc, number) => {
+    return number % 2 === 0 ? {even: acc.even + number, count: acc.count + 1} : acc;
+  }, {even: 0, count: 0});
+  return arr.length === 0 ? 0 : reduceResult.even / reduceResult.count;  
   }
-}
 
 function makeWork (arrOfArr, func) {
-
+  return getArrayParams(arr).max - getArrayParams(arr).min;
 }
