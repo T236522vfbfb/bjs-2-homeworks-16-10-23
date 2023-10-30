@@ -1,9 +1,9 @@
 function getArrayParams(...arr) {
   return {
-  min = Math.min(...arr);
-  max = -Math.max(...arr);
-   avg: Number((arr.reduce((acc, number) => acc + number, 0) / arr.lenght).toFixed(2))
-};
+    min: Math.min(...arr),
+    max: Math.max(...arr),
+    avg: Number((arr.reduce((acc, number) => acc + number, 0) / arr.length).toFixed(2))
+  }
 }
 
 function summElementsWorker(...arr) {
@@ -31,5 +31,8 @@ function averageEvenElementsWorker(...arr) {
   }
 
 function makeWork (arrOfArr, func) {
-  return getArrayParams(arr).max - getArrayParams(arr).min;
+  return func(arrOfArr).max - func(arrOfArr).min;
 }
+
+const arr = [[10, 10, 11, 20, 10], [67, 10, 2, 39, 88], [72, 75, 51, 87, 43], [30, 41, 55, 96, 62]];
+makeWork(arr, getArrayParams)
