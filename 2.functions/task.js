@@ -14,7 +14,6 @@ function differenceMaxMinWorker(...arr) {
     return arr.length === 0 ? 0 : Math.max(...arr) - Math.min(...arr);
   }
 
-
 function differenceEvenOddWorker(...arr) {
   const reduceResult = arr.reduce((acc, number) => {
     return number % 2 === 0 ? {even: acc.even + number, odd: acc.odd} : {even: acc.even, odd: acc.odd + number};
@@ -31,8 +30,12 @@ function averageEvenElementsWorker(...arr) {
   }
 
 function makeWork (arrOfArr, func) {
-  return func(arrOfArr).max - func(arrOfArr).min;
+  let maxWorkerResult = -Infinity;
+  arrOfArr.forEach(element => {
+    const result = func(...element);
+    if (result > maxWorkerResult) {
+      maxWorkerResult = result;
+    }
+  });
+  return maxWorkerResult;
 }
-
-const arr = [[10, 10, 11, 20, 10], [67, 10, 2, 39, 88], [72, 75, 51, 87, 43], [30, 41, 55, 96, 62]];
-makeWork(arr, getArrayParams)
