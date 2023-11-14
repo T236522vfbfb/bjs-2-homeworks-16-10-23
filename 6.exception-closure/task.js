@@ -27,14 +27,14 @@ class Triangle {
     }
 
 
-perimeter() {
-    return this.a + this.b + this.c;
-}
+    get perimeter() {
+        return this.a + this.b + this.c;
+    }
 
-area() {
-    const p = 0.5 * this.perimeter(); 
-    return Number(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(3));
-}
+    get area() {
+        const p = 0.5 * this.perimeter(); 
+        return Number(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(3));
+    }
 
 }
 
@@ -44,12 +44,8 @@ function getTriangle(a, b, c) {
     }
     catch (err) {
         return {
-            perimeter() {
-                return 'Ошибка! Треугольник не существует';
-            },
-            area() {
-                return 'Ошибка! Треугольник не существует';
-            }
+            perimeter: () => 'Ошибка! Треугольник не существует',
+            area: () => 'Ошибка! Треугольник не существует'
         }
     }
 }
